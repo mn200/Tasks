@@ -40,8 +40,16 @@ major hacking {
   - experiment with using Isar or some other DSL for script files
   - implement locales somehow (possibly requires the one above)
   - port sledgehammer
-  - how to enable monadsyntax all the time? which one? (don't know exactly what
-    this means)
+  - how to enable monadsyntax all the time? which one? 
+    Issue here is that we may not want to make all the overload_on calls to enable
+    the option monad, the state monad, and the state monad with options in the 
+    result (monads with failure) and all the other possible monads.  So, should we 
+    just enable none of them?  Or, should one get blessed as the canonical monad?
+    (If the latter, my vote would probably be for the transformer + failure monad.)
+
+    How to do this is pretty easy.  Just ensure that bossLib depends on monadsyntax,
+    and then (optionally) make the necessary overload calls to enable support for
+    the desired monads.
   - experiment with overloading instead of defining constants (especially in
     relationTheory)
 }
